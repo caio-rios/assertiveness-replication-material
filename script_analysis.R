@@ -69,6 +69,7 @@ ggsave("ev assert 2.png")
 
 # Histgram - show 0 overdispersion
 
+theme_set(theme_bw() + theme(panel.grid = element_blank()))
 
 g1 <- ggplot(df, aes(x = ASSERT1)) +
   geom_histogram(color = "black", fill = "gray80", binwidth = 1) +
@@ -91,7 +92,7 @@ g3
 
 g1 + g2 / g3
 
-
+setwd(here("graphs"))
 ggsave("overdispesions.png")
 
 # RODANDO OS MODELOS
@@ -290,13 +291,14 @@ ggplot(grafico %>%
          filter(var %in% c("VETO", "nd", "VETO:nd",
                            "ELEC_COMP", "ELEC_COMP:nd",
                            "LEG_FRAC", "LEG_FRAC:nd")) %>%
-         mutate(var = factor(var, levels = c("nd",
+         mutate(var = gsub(":", "\\*", var),
+                var = factor(var, levels = c("nd",
                                              "VETO", 
                                              "ELEC_COMP", 
                                              "LEG_FRAC", 
-                                             "ELEC_COMP:nd", 
-                                             "LEG_FRAC:nd", 
-                                             "VETO:nd"))),
+                                             "ELEC_COMP*nd", 
+                                             "LEG_FRAC*nd", 
+                                             "VETO*nd"))),
        aes(x = var, y = estimate, color = type)) +
   geom_hline(yintercept = 0) +
   geom_point(position = position_dodge2(width = 0.8, preserve = "single")) +
@@ -305,7 +307,11 @@ ggplot(grafico %>%
   coord_flip() +
   facet_wrap(~VD, ncol = 2) +
   theme_bw() +
-  theme(panel.grid = element_blank())
+  theme(panel.grid = element_blank()) +
+  labs(color = "Regression Type",
+       x = "Variables", 
+       y = "Estimates", 
+       caption = "Control variables were omitted from the figure. Full regression results are reported in the Appendix.")
 
 
 ggsave("main results.png")
