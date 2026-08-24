@@ -4,6 +4,7 @@ if(require(readstata13) == F) install.packages("readstata13"); require(readstata
 if(require(pscl) == F) install.packages("pscl"); require(pscl)
 if(require(sandwich) == F) install.packages("sandwich"); require(sandwich)
 if(require(tidyverse) == F) install.packages("tidyverse"); require(tidyverse)
+if(require(dplyr) == F) install.packages("dplyr"); require(dplyr)
 if(require(magrittr) == F) install.packages("magrittr"); require(magrittr)
 if(require(ggplot2) == F) install.packages("ggplot2"); require(ggplot2)
 if(require(naniar) == F) install.packages("naniar"); require(naniar)
@@ -74,20 +75,20 @@ theme_set(theme_bw() + theme(panel.grid = element_blank()))
 g1 <- ggplot(df, aes(x = ASSERT1)) +
   geom_histogram(color = "black", fill = "gray80", binwidth = 1) +
   scale_x_continuous(breaks = seq(0,18, 2)) +
-  labs(x = "Assertivity 1", y = "Count") 
+  labs(x = "Assertiveness 1", y = "Count") 
 g1
 
 
 g2 <- ggplot(df, aes(x = ASSERT2)) +
   geom_histogram(color = "black", fill = "gray80", binwidth = 1) +
   scale_x_continuous(breaks = seq(0,30, 5)) +
-  labs(x = "Assertivity 2", y = "Count")
+  labs(x = "Assertiveness 2", y = "Count")
 g2
 
 g3 <- ggplot(df, aes(x = ASSERT3)) +
   geom_histogram(color = "black", fill = "gray80", binwidth = 1) +
   scale_x_continuous(breaks = seq(0,71, 10)) +
-  labs(x = "Assertivity 3", y = "Count")
+  labs(x = "Assertiveness 3", y = "Count")
 g3
 
 g1 + g2 / g3
@@ -184,93 +185,93 @@ stargazer(M1, M2, M3, M4, M5, M6, M7, M8, M9, column.labels = c("M1", "M2", "M3"
 grafico1 <- data.frame(var = names(M1$coefficients$count),
                        estimate = M1$coefficients$count,
                        ci_lower = confint(M1)[1:16,1],
-                       ci_upper = confint(M1)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 1")
+                       ci_upper = confint(M1)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 1")
 
 grafico2 <- data.frame(var = names(M2$coefficients$count),
                        estimate = M2$coefficients$count,
                        ci_lower = confint(M2)[1:16,1],
-                       ci_upper = confint(M2)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 1")
+                       ci_upper = confint(M2)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 1")
 
 grafico3 <- data.frame(var = names(M3$coefficients$count),
                        estimate = M3$coefficients$count,
                        ci_lower = confint(M3)[1:16,1],
-                       ci_upper = confint(M3)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 1")
+                       ci_upper = confint(M3)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 1")
 
 grafico4 <- data.frame(var = names(M4$coefficients$count),
                        estimate = M4$coefficients$count,
                        ci_lower = confint(M4)[1:16,1],
-                       ci_upper = confint(M4)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 2")
+                       ci_upper = confint(M4)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 2")
 
 grafico5 <- data.frame(var = names(M5$coefficients$count),
                        estimate = M5$coefficients$count,
                        ci_lower = confint(M5)[1:16,1],
-                       ci_upper = confint(M5)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 2")
+                       ci_upper = confint(M5)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 2")
 
 grafico6 <- data.frame(var = names(M6$coefficients$count),
                        estimate = M6$coefficients$count,
                        ci_lower = confint(M6)[1:16,1],
-                       ci_upper = confint(M6)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 2")
+                       ci_upper = confint(M6)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 2")
 
 grafico7 <- data.frame(var = names(M7$coefficients$count),
                        estimate = M7$coefficients$count,
                        ci_lower = confint(M7)[1:16,1],
-                       ci_upper = confint(M7)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 3")
+                       ci_upper = confint(M7)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 3")
 
 grafico8 <- data.frame(var = names(M8$coefficients$count),
                        estimate = M8$coefficients$count,
                        ci_lower = confint(M8)[1:16,1],
-                       ci_upper = confint(M8)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 3")
+                       ci_upper = confint(M8)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 3")
 
 grafico9 <- data.frame(var = names(M9$coefficients$count),
                        estimate = M9$coefficients$count,
                        ci_lower = confint(M9)[1:16,1],
-                       ci_upper = confint(M9)[1:16, 2]) %>% mutate(type = "Count", VD = "ASSERT 3")
+                       ci_upper = confint(M9)[1:16, 2]) %>% mutate(type = "Count", VD = "Assertiveness 3")
 
 
 grafico11 <- data.frame(var = names(M1$coefficients$zero),
                         estimate = M1$coefficients$zero,
                         ci_lower = confint(M1)[17:32,1],
-                        ci_upper = confint(M1)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 1")
+                        ci_upper = confint(M1)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 1")
 
 grafico12 <- data.frame(var = names(M2$coefficients$zero),
                         estimate = M2$coefficients$zero,
                         ci_lower = confint(M2)[17:32,1],
-                        ci_upper = confint(M2)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 1")
+                        ci_upper = confint(M2)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 1")
 
 grafico13 <- data.frame(var = names(M3$coefficients$zero),
                         estimate = M3$coefficients$zero,
                         ci_lower = confint(M3)[17:32,1],
-                        ci_upper = confint(M3)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 1")
+                        ci_upper = confint(M3)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 1")
 
 grafico14 <- data.frame(var = names(M4$coefficients$zero),
                         estimate = M4$coefficients$zero,
                         ci_lower = confint(M4)[17:32,1],
-                        ci_upper = confint(M4)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 2")
+                        ci_upper = confint(M4)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 2")
 
 grafico15 <- data.frame(var = names(M5$coefficients$zero),
                         estimate = M5$coefficients$zero,
                         ci_lower = confint(M5)[17:32,1],
-                        ci_upper = confint(M5)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 2")
+                        ci_upper = confint(M5)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 2")
 
 grafico16 <- data.frame(var = names(M6$coefficients$zero),
                         estimate = M6$coefficients$zero,
                         ci_lower = confint(M6)[17:32,1],
-                        ci_upper = confint(M6)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 2")
+                        ci_upper = confint(M6)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 2")
 
 grafico17 <- data.frame(var = names(M7$coefficients$zero),
                         estimate = M7$coefficients$zero,
                         ci_lower = confint(M7)[17:32,1],
-                        ci_upper = confint(M7)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 3")
+                        ci_upper = confint(M7)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 3")
 
 grafico18 <- data.frame(var = names(M8$coefficients$zero),
                         estimate = M8$coefficients$zero,
                         ci_lower = confint(M8)[17:32,1],
-                        ci_upper = confint(M8)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 3")
+                        ci_upper = confint(M8)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 3")
 
 grafico19 <- data.frame(var = names(M9$coefficients$zero),
                         estimate = M9$coefficients$zero,
                         ci_lower = confint(M9)[17:32,1],
-                        ci_upper = confint(M9)[17:32, 2]) %>% mutate(type = "Zero", VD = "ASSERT 3")
+                        ci_upper = confint(M9)[17:32, 2]) %>% mutate(type = "Zero", VD = "Assertiveness 3")
 
 
 
